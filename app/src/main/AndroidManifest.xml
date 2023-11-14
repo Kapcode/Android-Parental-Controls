@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <service android:enabled="true" android:name="com.kapcode.parentalcontrols.ExampleService" />
+        <receiver android:name=".MyAlarmReceiver" />
     </application>
 
 </manifest>

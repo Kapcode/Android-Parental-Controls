@@ -17,15 +17,13 @@ import androidx.core.app.NotificationCompat;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ExampleService extends Service {
-    static Service s;
+public class ParentalControlService extends Service {
     static volatile AtomicBoolean serviceIsRunning = new AtomicBoolean(false);
     static volatile AtomicBoolean serviceStoppedByUser = new AtomicBoolean(false);
     static volatile Thread serviceThread;
     @Override
     public void onStart(Intent intent, int startId) {
         System.out.println("Started");
-        s = this;
         super.onStart(intent, startId);
     }
     @Nullable
@@ -38,8 +36,6 @@ public class ExampleService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         System.out.println("Start");
-        serviceStoppedByUser.set(false);
-        serviceIsRunning.set(true);
         System.out.println("Service Create");
         // Create the Foreground Service
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -55,9 +51,8 @@ public class ExampleService extends Service {
         serviceThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                int loop = 25;
-                while(serviceIsRunning.get() && loop >0){ //loop is simulating android killing off service, or end of work,
-                    // you can use this to test watch dog, or to simulate end of work
+                int loop = 100;
+                while(serviceIsRunning.get() && loop >0){
                     System.out.println(loop);
                     loop--;
                     try {
@@ -65,16 +60,10 @@ public class ExampleService extends Service {
                     } catch (InterruptedException e) {
 
                     }
-
                 }
-
-                serviceIsRunning.set(false);
-                s.stopService(intent);
             }
-
         });
         serviceThread.start();
-
 
         return START_STICKY;
     }
@@ -96,6 +85,6 @@ public class ExampleService extends Service {
         channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
         notificationManager.createNotificationChannel(channel);
         return channelId;
-    }
+    }//TODO ADD TO GITHUB!!!!
 
 }
