@@ -6,17 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <RadioButton
+        android:id="@+id/whitelistRB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_below="@id/grantAccess"
+        android:layout_centerHorizontal="true"
+        android:checked="false"
+        android:text="Whitelist"
+        android:textSize="16sp" />
+
+    <RadioButton
+        android:id="@+id/blacklistRB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/grantAccess"
+        android:layout_toRightOf="@id/whitelistRB"
+        android:checked="true"
+        android:text="Blacklist"
+        android:textSize="16sp" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizScroll"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/whitelistRB"
+        android:nestedScrollingEnabled="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ScrollView
+                android:id="@+id/scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="true"
+                android:scrollbarAlwaysDrawHorizontalTrack="true">
+
+                <LinearLayout
+                    android:id="@+id/scroll_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <Button
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:onClick="startButton"
         android:text="Start" />
 
@@ -27,5 +70,14 @@
         android:layout_toRightOf="@id/startButton"
         android:onClick="stopButton"
         android:text="Stop" />
+
+    <Button
+        android:id="@+id/grantAccess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startButton"
+        android:layout_alignLeft="@id/startButton"
+        android:onClick="grantAccessButton"
+        android:text="Grant Usage Access" />
 
 </RelativeLayout>
