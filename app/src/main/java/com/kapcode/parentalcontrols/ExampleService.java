@@ -56,7 +56,7 @@ public class ExampleService extends Service {
             @Override
             public void run() {
                 int loop = 25;
-                while(serviceIsRunning.get() && loop >0){ //loop is simulating android killing off service, or end of work,
+                while(serviceIsRunning.get() && loop >0){ //loop counting down to 0 is simulating android killing off service, or end of work,
                     // you can use this to test watch dog, or to simulate end of work
                     System.out.println(loop);
                     loop--;
@@ -86,7 +86,7 @@ public class ExampleService extends Service {
         // do stuff like register for BroadcastReceiver, etc.
 
     }
-    @RequiresApi(Build.VERSION_CODES.O)
+    //requires API Level O ... 26 ... This is projects min sdk
     private String createNotificationChannel(NotificationManager notificationManager){
         String channelId = "my_service_channelid";
         String channelName = "My Foreground Service";
